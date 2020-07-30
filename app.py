@@ -60,7 +60,7 @@ def names():
     session = Session(engine)
 
     """Return a list of all passenger names"""
-    # Query all passengers
+    # Query precipitation on filtered date
     precipitation = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= query_date).all()
 
     precipitation_data = {}
@@ -114,7 +114,7 @@ def start_temp(start):
     session = Session (bind = engine)
 
     """Return min, max, avg for temp between start and end"""
-    # Query top station
+    # Query min, avg, and max temp
     start_temps = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
                 filter(Measurement.date >= start).all()
 
@@ -129,7 +129,7 @@ def start_end_temp(start,end):
     session = Session (bind = engine)
 
     """Return min, max, avg for temp between start and end"""
-    # Query top station
+    # Query min, avg, and max temp
     start_end_temps = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
                     filter(Measurement.date >= start).\
                     filter(Measurement.date <= end).all()
